@@ -1,8 +1,52 @@
 import { useState } from "react";
 import "./App.css";
 
+// Componente reutilizable que muestra un input de número y botones de incrementar y decrementar
+function NumberInput(props) {
+  // Función que se ejecuta cuando el usuario escribe en el input de número
+  const handleInputChange = (event) => {
+    // Obtiene el nuevo valor del input y lo convierte a un número entero
+    const newValue = parseInt(event.target.value);
+
+    // Si el valor es un número válido, actualiza el valor del componente padre
+    if (!isNaN(newValue)) {
+      props.onChange(newValue);
+    }
+  };
+
+  // Función que se ejecuta cuando el usuario hace clic en el botón de incrementar
+  const handleIncrementClick = () => {
+    // Incrementa el valor del componente padre en 1
+    props.onChange(props.value + 1);
+  };
+
+  // Función que se ejecuta cuando el usuario hace clic en el botón de decrementar
+  const handleDecrementClick = () => {
+    // Decrementa el valor del componente padre en 1, pero nunca lo hace menor que 1
+    props.onChange(Math.max(props.value - 1, 1));
+  };
+
+  // Renderiza el input y los botones de incrementar y decrementar
+  return (
+    <div className="number-input">
+      <button className="button" onClick={handleIncrementClick}>
+        +
+      </button>
+      <input
+        type="text"
+        className="input-text"
+        value={props.value}
+        onChange={handleInputChange}
+      />
+      <button className="button" onClick={handleDecrementClick}>
+        -
+      </button>
+    </div>
+  );
+}
+
 function App() {
-  // Definimos el estado inicial de los valores de los checkboxes y el valor total
+  // Estado inicial de los servicios que ofrecemos
   const [servicios, setServicios] = useState({
     web: false,
     seo: false,
@@ -11,27 +55,25 @@ function App() {
     idiomas: 1,
   });
 
-  // Función que se ejecuta cada vez que se produce un cambio en un checkbox
+  // Función que se ejecuta cuando el usuario cambia el estado de una casilla de verificación
   const handleCheckboxChange = (event) => {
-    
-    // Obtenemos el nombre y el valor del checkbox que ha cambiado
     const { name, checked } = event.target;
 
-    // Actualizamos el estado de checkboxValues con el nuevo valor del checkbox que ha cambiado
+    // Actualiza el estado de los servicios usando la función `setServicios` de React
+    // Para mantener los otros valores del estado, usa el operador spread para copiar el objeto anterior
     setServicios((prevServicios) => ({
       ...prevServicios,
       [name]: checked,
     }));
   };
 
-  // Manejador de cambios para los inputs de número
-  const handleInputNumberChange = (event) => {
-    const { name, value } = event.target;
-
-    // Actualizar el estado de servicios y parsear el valor a un número entero
+  // Función que se ejecuta cuando el usuario cambia el valor de un input de número
+  const handleNumberInputChange = (name) => (value) => {
+    // Actualiza el estado de los servicios usando la función `setServicios` de React
+    // Para mantener los otros valores del estado, usa el operador spread para copiar el objeto anterior
     setServicios((prevServicios) => ({
       ...prevServicios,
-      [name]: parseInt(value),
+      [name]: value,
     }));
   };
 
@@ -55,7 +97,7 @@ function App() {
   // Renderizamos el componente
   return (
     <div className="container">
-      <h3>¿Qué quieres hacer?</h3>
+      <h3>Que quieres hacer?</h3>
       <div>
         <label>
           <input
@@ -72,24 +114,18 @@ function App() {
             <div className="input-container">
               <label>
                 Número de páginas:
-                <input
-                  type="number"
-                  name="paginas"
+                <NumberInput
                   value={servicios.paginas}
-                  onChange={handleInputNumberChange}
-                  min="1"
+                  onChange={handleNumberInputChange("paginas")}
                 />
               </label>
             </div>
             <div className="input-container">
               <label>
                 Número de idiomas:
-                <input
-                  type="number"
-                  name="idiomas"
+                <NumberInput
                   value={servicios.idiomas}
-                  onChange={handleInputNumberChange}
-                  min="1"
+                  onChange={handleNumberInputChange("idiomas")}
                 />
               </label>
             </div>
@@ -104,7 +140,7 @@ function App() {
             checked={servicios.seo}
             onChange={handleCheckboxChange}
           />
-          Una consultoría SEO ($300)
+          Una consultoria SEO ($300)
         </label>
       </div>
       <div>
