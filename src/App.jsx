@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 // Componente reutilizable que muestra un input de número y botones de incrementar y decrementar
@@ -77,6 +77,19 @@ function App() {
     }));
   };
 
+  // Cargar los datos del localstorage al iniciar el componente
+  useEffect(() => {
+    const serviciosGuardados = localStorage.getItem("servicios");
+
+    if (serviciosGuardados) {
+      setServicios(JSON.parse(serviciosGuardados));
+    }
+  }, []);
+
+  // Actualizar el localstorage cuando se modifica el estado de los servicios
+  useEffect(() => {
+    localStorage.setItem("servicios", JSON.stringify(servicios));
+  }, [servicios]);
   // Inicializar la variable total
   let total = 0;
 
