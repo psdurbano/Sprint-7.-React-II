@@ -50,7 +50,7 @@
 }
 
 .button {
-  background-color: #d27117; /* un color de ejemplo */
+  background-color: #d27117;
   border: none;
   color: white;
   padding: 8px 16px;
@@ -63,4 +63,27 @@
   cursor: pointer;
 }
 
+.button-Link{
+  text-decoration: none;
+  color: #030303;
+}
 
+.h3 {
+  justify-content: flex;
+  max-width: 50%;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-size: 0,5rem;
+  font-weight: bold;
+}
+
+.p{
+    justify-content: flex;
+    max-width: 50%;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0,3rem;
+    font-weight: normal;
+}
