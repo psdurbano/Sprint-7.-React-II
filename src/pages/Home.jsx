@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "../styled/style";
 import { Link, Route } from "react-router-dom";
 import "../App.css";
 
@@ -18,9 +19,9 @@ export default function Home() {
         de búsqueda. Al final, verás el presupuesto total y podrás decidir si
         continuar con la creación de tu sitio web.
       </p>
-      <button className="button">
+      
       <Link className="button-Link" to="/App">Iniciar</Link>
-      </button>
+  
     </div>
   );
 }

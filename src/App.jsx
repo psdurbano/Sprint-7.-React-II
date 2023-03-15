@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Button, ModalB } from "../src/styled/style";
+import Modal from "./components/modal";
 import "./App.css";
 
 // Componente reutilizable que muestra un input de número y botones de incrementar y decrementar
@@ -29,22 +31,23 @@ function NumberInput(props) {
   // Renderiza el input y los botones de incrementar y decrementar
   return (
     <div className="number-input">
-      <button className="button" onClick={handleIncrementClick}>
+      <Button onClick={handleIncrementClick}>
         +
-      </button>
+      </Button>
       <input
         type="text"
         className="input-text"
         value={props.value}
         onChange={handleInputChange}
       />
-      <button className="button" onClick={handleDecrementClick}>
+      <Button onClick={handleDecrementClick}>
         -
-      </button>
+      </Button>
+      <Modal/>
+      <ModalB>i</ModalB>
     </div>
   );
 }
-
 function App() {
   // Estado inicial de los servicios que ofrecemos
   const [servicios, setServicios] = useState({
