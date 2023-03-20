@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styled from "styled-components";
 
 const Modal = () => {
@@ -6,12 +7,12 @@ const Modal = () => {
 
         <OverLay>
             <ModalOverlay>
-                    <h3>Modal Header</h3>
+                    <div>modallll</div>
             </ModalOverlay>
             
         </OverLay>
     )
-} 
+}
 
 export default Modal;
 
@@ -30,7 +31,7 @@ const OverLay = styled.div`
 
 const ModalOverlay = styled.div`
     width: 600px;
-    height: 200px;
+    height: 100px;
     background: white;
     position: relative;
     border-radius: 5px;

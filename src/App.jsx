@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { Button, ModalB } from "../src/styled/style";
-import Modal from "./components/modal";
+import Popup from 'reactjs-popup';
 import "./App.css";
 
+let activo = false;
 // Componente reutilizable que muestra un input de número y botones de incrementar y decrementar
 function NumberInput(props) {
+
   // Función que se ejecuta cuando el usuario escribe en el input de número
   const handleInputChange = (event) => {
     // Obtiene el nuevo valor del input y lo convierte a un número entero
@@ -30,6 +32,7 @@ function NumberInput(props) {
 
   // Renderiza el input y los botones de incrementar y decrementar
   return (
+    <div>
     <div className="number-input">
       <Button onClick={handleIncrementClick}>
         +
@@ -43,8 +46,15 @@ function NumberInput(props) {
       <Button onClick={handleDecrementClick}>
         -
       </Button>
-      <Modal/>
-      <ModalB>i</ModalB>
+      <div>
+      <Popup trigger={<ModalB ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-info-circle" viewBox="0 0 17 14">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+</svg></ModalB>} position="right center">
+    <div>Este componente debe indicar el numero de paginas que tendra tu web</div>
+  </Popup>
+      </div>
+    </div>
     </div>
   );
 }
@@ -110,6 +120,7 @@ function App() {
     total += 200;
   }
 
+  console.log(activo);
   // Renderizamos el componente
   return (
     <div className="container">
@@ -172,6 +183,7 @@ function App() {
       </div>
       <p>Precio: ${total}</p>
     </div>
+    
   );
 }
 

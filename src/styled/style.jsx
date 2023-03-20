@@ -19,6 +19,7 @@ export const ModalB = styled.button`
   color: #f6f6f6;
   border: none;
   margin: 5px 5px 5px 5px;
+  padding: -5px 10px;
   text-align: center;
   height: 25px;
   width: 25px;
