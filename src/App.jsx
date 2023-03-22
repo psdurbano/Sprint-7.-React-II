@@ -73,6 +73,7 @@ function App() {
   const [nombrePresupuesto, setNombrePresupuesto] = useState("");
   const [nombreCliente, setNombreCliente] = useState("");
   const [presupuestos, setPresupuestos] = useState([]);
+  const [orden, setOrden] = useState('default');
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
@@ -132,6 +133,21 @@ function App() {
 
     return total;
   };
+
+  const sortByName = () => {
+    setOrden('name');
+    setPresupuestos([...presupuestos].sort((a, b) => a.nombrePresupuesto.localeCompare(b.nombrePresupuesto)))
+  }
+
+  const sortByDate = () => {
+    setOrden('date');
+    setPresupuestos([...presupuestos].sort((a, b) => new Date(b.fecha) - new Date(a.fecha)))
+  }
+
+  const resetSort = () => {
+    setOrden('default');
+    setPresupuestos([...presupuestos])
+  }
 
   useEffect(() => {
     const serviciosGuardados = localStorage.getItem("servicios");
@@ -228,6 +244,11 @@ function App() {
       <div>
         <h3>Presupuestos</h3>
         {presupuestos.length === 0 && <p>No hay presupuestos ingresados</p>}
+        <div className="sort-buttons">
+          <button onClick={sortByName}>Ordenar por nombre</button>
+          <button onClick={sortByDate}>Ordenar por fecha</button>
+          <button onClick={resetSort}>Reiniciar orden</button>
+        </div>
         {presupuestos.map((presupuesto) => (
           <div key={presupuesto.fecha}>
             <h4>{presupuesto.nombrePresupuesto}</h4>
